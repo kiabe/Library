@@ -1,0 +1,9 @@
+#shelf {
+    border: 4px double blue;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.game {
+    border: 2px solid red;
+}
