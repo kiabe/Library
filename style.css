@@ -2,8 +2,15 @@
     border: 4px double blue;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
 }
 
 .game {
     border: 2px solid red;
+    margin: 6px;
+}
+
+li {
+    list-style: none;
+    padding: 10px;
 }
