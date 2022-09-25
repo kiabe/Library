@@ -1,10 +1,4 @@
-let gameLibrary = [
-    {
-        name: "Multiversus",
-        genre: "Fighting",
-        multiplayer: true
-    }
-];
+let gameLibrary = [];
 
 function Game(name, genre, multiplayer) {
     this.name = name
@@ -25,59 +19,74 @@ Game.prototype.isMultiplayer = function () {
 };
 
 function addGameToLibrary(Game) {
-    // code here to add new Game object to gameLibrary array
-    // to add to an existing array, can use .push() function
+    // add game to library array and create a case with it
     gameLibrary.push(Game);
+    createGameCase();
 }
-
-let RE2Make = new Game('Resident Evil 2 Remake', 'Survival Horror', false);
-addGameToLibrary(RE2Make);
-
-let Valorant = new Game('Valorant', 'Tactical FPS', true);
-addGameToLibrary(Valorant);
 
 // DOM Variable Selectors
 const shelf = document.querySelector('#shelf');
-const gameCaseCount = document.querySelectorAll('.game');
 const button = document.querySelector('#button');
 
 // DOM Stuff
 function createGameCase() {
+    // create game div and have it contain a singular ul
+
     const gameCase = document.createElement('div');
+    const ul = document.createElement('ul');
+
     gameCase.classList.add('game');
     shelf.appendChild(gameCase);
+    gameCase.appendChild(ul);
 }
 
 function labelGameCase() {
-    // Prints on to div with class name 'game' that label cases with the following: name, genre, and whether it is multiplayer or not
-    // Loops through gameLibrary array and prints content of object to gameCase div
+    // Prints on to .game div that label cases with the following: name, genre, and whether it is multiplayer or not
+    // bullet points are printed in Lis
 
-    for (let i = 0; i < gameCaseCount.length; i++) {
-        const ul = document.createElement('ul');
-        gameCaseCount[i].appendChild(ul);
-        for (let j = 0; j < 20; j++) {
-            // print content of gameLibrary to divs in gameCase
+    const ulNodes = document.querySelectorAll('ul');
+    console.log(ulNodes);
+    const ulCount = ulNodes.length;
+
+    for (let i = ulCount; i < ulCount + 1; i++) {
+        for (let j = 0; j < 3; j++) {
+            const li = document.createElement('li');
+            ulNodes[i - 1].appendChild(li)
             if (j === 0) {
-                const li = document.createElement('li');
-                ul.appendChild(li);
-                li.textContent = "Name of game: " + gameLibrary[i].name;
+                li.textContent = "Name of game: " + gameLibrary[i - 1].name;
             } else if (j === 1) {
-                const li = document.createElement('li');
-                ul.appendChild(li);
-                li.textContent = "Genre: " + gameLibrary[i].genre;
+                li.textContent = "Genre: " + gameLibrary[i - 1].genre;
             } else if (j === 2) {
-                const li = document.createElement('li');
-                ul.appendChild(li);
-                li.textContent = "Is this multiplayer? : " + gameLibrary[i].multiplayer;
+                li.textContent = "Is this multiplayer? : " + gameLibrary[i - 1].multiplayer;
             }
         }
     }
+
 }
 
-labelGameCase();
+function defaultPlaceholder() {
+    // label game cases with 3 bullet points of info
+}
 
 // DOM Button Stuff
 const newGameButton = document.createElement('button');
 newGameButton.setAttribute('id', 'newGameButton');
 newGameButton.textContent = 'Add New Game to Library';
 button.appendChild(newGameButton);
+
+// Button function
+
+newGameButton.addEventListener('click', buttonFunction)
+
+function buttonFunction() {
+    let Placeholder;
+    let questionOne = prompt("What is the game's name?");
+    let questionTwo = prompt("What is the game's genre?");
+    let questionThree = prompt("Is this game multiplayer? True or False?");
+
+    if (questionOne !== null && questionTwo !== null && questionThree !== null) {
+        Placeholder = new Game(questionOne, questionTwo, questionThree);
+        addGameToLibrary(Placeholder);
+        labelGameCase();
+    };
+};
