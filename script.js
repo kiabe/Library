@@ -30,7 +30,7 @@ const button = document.querySelector('#button');
 
 // DOM Stuff
 function createGameCase() {
-    // create game div and have it contain a singular ul
+    // create game div and have it contain a singular ul and a remove button
 
     const gameCase = document.createElement('div');
     const ul = document.createElement('ul');
@@ -38,6 +38,11 @@ function createGameCase() {
     gameCase.classList.add('game');
     shelf.appendChild(gameCase);
     gameCase.appendChild(ul);
+
+    const remove = document.createElement('button');
+    remove.classList.add('remove');
+    remove.textContent = 'Remove';
+    gameCase.appendChild(remove);
 }
 
 function labelGameCase() {
@@ -61,11 +66,6 @@ function labelGameCase() {
             }
         }
     }
-
-}
-
-function defaultPlaceholder() {
-    // label game cases with 3 bullet points of info
 }
 
 // DOM Button Stuff
