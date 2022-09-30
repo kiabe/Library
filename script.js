@@ -4,6 +4,7 @@ function Game(name, genre, multiplayer) {
     this.name = name
     this.genre = genre
     this.multiplayer = multiplayer
+    this.dataID = undefined
 }
 
 Game.prototype.sayName = function () {
@@ -18,10 +19,26 @@ Game.prototype.isMultiplayer = function () {
     return this.multiplayer;
 };
 
+Game.prototype.whatIsDataId = function () {
+    return this.dataID;
+}
+
+function addDataId() {
+    // add dataID to each Game in GameLibrary
+    let libraryCount = gameLibrary.length;
+    // GameLibrary initially ZERO (0)
+    // Add 1 makes length = 1
+    for (let i = libraryCount; i < libraryCount + 1; i++) {
+        gameLibrary[i - 1].dataID = i - 1;
+    }
+} 
+
 function addGameToLibrary(Game) {
-    // add game to library array and create a case with it
+    // add game to library array, add DataID, and create a case with it
     gameLibrary.push(Game);
+    addDataId();
     createGameCase();
+    console.log(gameLibrary);
 }
 
 // DOM Variable Selectors
@@ -74,7 +91,7 @@ newGameButton.setAttribute('id', 'newGameButton');
 newGameButton.textContent = 'Add New Game to Library';
 button.appendChild(newGameButton);
 
-// Button function
+// New Game Button function
 
 newGameButton.addEventListener('click', buttonFunction)
 
