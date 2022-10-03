@@ -24,20 +24,24 @@ Game.prototype.whatIsDataId = function () {
 }
 
 function addDataId() {
-    // add dataID to each Game in GameLibrary
+    // add dataID
     let libraryCount = gameLibrary.length;
-    // GameLibrary initially ZERO (0)
-    // Add 1 makes length = 1
+    let gameNodes = document.querySelectorAll('.game');
+    let gameCount = gameNodes.length;
+    let removeNodes = document.querySelectorAll('.remove');
+    let removeCount = removeNodes.length;
+
     for (let i = libraryCount; i < libraryCount + 1; i++) {
         gameLibrary[i - 1].dataID = i - 1;
+        removeNodes[i - 1].dataset.id = i - 1;
     }
 } 
 
 function addGameToLibrary(Game) {
     // add game to library array, add DataID, and create a case with it
     gameLibrary.push(Game);
-    addDataId();
     createGameCase();
+    addDataId();
     console.log(gameLibrary);
 }
 
@@ -60,6 +64,8 @@ function createGameCase() {
     remove.classList.add('remove');
     remove.textContent = 'Remove';
     gameCase.appendChild(remove);
+
+    remove.addEventListener('click', removeGame);
 }
 
 function labelGameCase() {
@@ -67,7 +73,6 @@ function labelGameCase() {
     // bullet points are printed in Lis
 
     const ulNodes = document.querySelectorAll('ul');
-    console.log(ulNodes);
     const ulCount = ulNodes.length;
 
     for (let i = ulCount; i < ulCount + 1; i++) {
@@ -105,5 +110,17 @@ function buttonFunction() {
         Placeholder = new Game(questionOne, questionTwo, questionThree);
         addGameToLibrary(Placeholder);
         labelGameCase();
+    };
+};
+
+const removeGame = e => {
+    let targetIdNumber = parseInt(e.target.dataset.id);
+    let gameNodes = document.querySelectorAll('.game');
+    console.log(targetIdNumber);
+    console.log(typeof(targetIdNumber));
+    if (targetIdNumber === gameLibrary[targetIdNumber].dataID) {
+        gameLibrary.splice(targetIdNumber, 1);
+        gameNodes[targetIdNumber].remove();
+        addDataId();
     };
 };
