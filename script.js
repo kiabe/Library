@@ -80,7 +80,7 @@ function labelGameCase() {
             const li = document.createElement('li');
             ulNodes[i - 1].appendChild(li)
             if (j === 0) {
-                li.textContent = "Name of game: " + gameLibrary[i - 1].name;
+                li.textContent = gameLibrary[i - 1].name;
             } else if (j === 1) {
                 li.textContent = "Genre: " + gameLibrary[i - 1].genre;
             } else if (j === 2) {
